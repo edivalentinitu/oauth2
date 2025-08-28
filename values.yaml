@@ -1,0 +1,22 @@
+# ingress: https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml#L169
+ingress:
+  enabled: true
+  className: nginx
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  path: /
+  pathType: Prefix
+  hosts:
+    - <path:kv/data/oauth2proxy#HOSTNAME>
+  tls: []
+
+extraArgs:
+ - --whitelist-domain=<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>
+ - --cookie-domain=<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>
+ - --provider=keycloak-oidc
+ - --client-id=<path:kv/data/oauth2proxy#CLIENT_ID>
+ - --client-secret=<path:kv/data/oauth2proxy#CLIENT_SECRET>
+ - --oidc-issuer-url=https://keycloak.cyverse.at/auth/realms/CyVerse
+ - --upstream=https://<path:kv/data/oauth2proxy#HOSTNAME>
