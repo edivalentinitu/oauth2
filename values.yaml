@@ -13,10 +13,10 @@ ingress:
   tls: []
 
 extraArgs:
- - --whitelist-domain=<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>
- - --cookie-domain=<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>
+ - --whitelist-domain={{ (vault "kv/data/oauth2proxy").data.WHITELIST_DOMAIN }}
+ - --cookie-domain={{ (vault "kv/data/oauth2proxy").data.WHITELIST_DOMAIN }}
  - --provider=keycloak-oidc
- - --client-id=<path:kv/data/oauth2proxy#CLIENT_ID>
- - --client-secret=<path:kv/data/oauth2proxy#CLIENT_SECRET>
+ - --client-id={{ (vault "kv/data/oauth2proxy").data.CLIENT_ID }}
+ - --client-secret={{ (vault "kv/data/oauth2proxy").data.CLIENT_SECRET }}
  - --oidc-issuer-url=https://keycloak.cyverse.at/auth/realms/CyVerse
  - --upstream=https://argocd-server.argocd.svc.cluster.local:80
