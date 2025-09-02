@@ -1,15 +1,14 @@
 # ingress: https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml#L169
 config:  
-  provider: "keycloak-oidc"
   clientID: "<path:kv/data/oauth2proxy#CLIENT_ID>"
   clientSecret: "<path:kv/data/oauth2proxy#CLIENT_SECRET>"
-  oidcIssuerURL: "https://keycloak.cyverse.at/auth/realms/CyVerse"
-  upstreams:
-    - "https://argocd-server.argocd.svc.cluster.local:80"
-  cookieDomains:
-    - "<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>"
-  whitelistDomains:
-    - "<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>"
+  configFile: |
+    provider: "keycloak-oidc"
+    oidcIssuerURL: "https://keycloak.cyverse.at/auth/realms/CyVerse"
+    cookie_domains = ["<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>"]
+    whitelist_domains = ["<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>"]
+    upstreams = ["https://argocd-server.argocd.svc.cluster.local:80"]
+    
 ingress:
   enabled: true
   className: nginx
