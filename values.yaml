@@ -19,4 +19,4 @@ extraArgs:
  - --client-id=<path:kv/data/oauth2proxy#CLIENT_ID>
  - --client-secret=<path:kv/data/oauth2proxy#CLIENT_SECRET>
  - --oidc-issuer-url=https://keycloak.cyverse.at/auth/realms/CyVerse
- - --upstream=https://<path:kv/data/oauth2proxy#HOSTNAME>
+ - --upstream=https://argocd-server.argocd.svc.cluster.local:80
