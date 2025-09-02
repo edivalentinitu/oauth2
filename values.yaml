@@ -7,9 +7,9 @@ config:
   upstreams:
     - "https://argocd-server.argocd.svc.cluster.local:80"
   cookieDomains:
-    - "path:kv/data/oauth2proxy#WHITELIST_DOMAIN"
+    - "<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>"
   whitelistDomains:
-    - "path:kv/data/oauth2proxy#WHITELIST_DOMAIN"
+    - "<path:kv/data/oauth2proxy#WHITELIST_DOMAIN>"
 ingress:
   enabled: true
   className: nginx
