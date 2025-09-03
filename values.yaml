@@ -1,8 +1,4 @@
 # ingress: https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml#L169
-envFrom:
-  - secretRef:
-      name: oauth2proxy-secrets
-      
 ingress:
   enabled: true
   className: nginx
@@ -13,14 +9,14 @@ ingress:
   path: /
   pathType: Prefix
   hosts:
-    - ${HOSTNAME}
+    - <path:secrets/invenio/data/oauth2proxy#HOSTNAME>
   tls: []
 
 extraArgs:
- - --whitelist-domain=${WHITELIST_DOMAIN}
- - --cookie-domain=${WHITELIST_DOMAIN}
+ - <path:secrets/invenio/data/oauth2proxy#WHITELIST_DOMAIN_ARG>
+ - <path:secrets/invenio/data/oauth2proxy#COOKIE_DOMAIN_ARG>
  - --provider=keycloak-oidc
- - --client-id=${CLIENT_ID}
- - --client-secret=${CLIENT_SECRET}
+ - <path:secrets/invenio/data/oauth2proxy#CLIENT_ID_ARG>
+ - <path:secrets/invenio/data/oauth2proxy#CLIENT_SECRET_ARG>
  - --oidc-issuer-url=https://keycloak.cyverse.at/auth/realms/CyVerse
- - --upstream=https://argocd-server.argocd.svc.cluster.local:80
+ - <path:secrets/invenio/data/oauth2proxy#UPSTREAM_ARG>
